@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useMemo } from "react"
+import { Poppins } from "next/font/google"
 import { SparklesText } from "./sparkles-text"
 
 // Data Configuration
@@ -32,6 +33,8 @@ const layersData = [
   { className: "layer-2", speed: "30s", size: "145px", zIndex: 4, image: "2" },
   { className: "layer-1", speed: "20s", size: "136px", zIndex: 5, image: "1" },
 ]
+
+const poppins = Poppins({ weight: ["300", "400", "600", "700"], subsets: ["latin"] })
 
 const MountainVistaParallax = ({ title = "", subtitle = "", children }) => {
   // Generate dynamic CSS for each layer
@@ -68,11 +71,11 @@ const MountainVistaParallax = ({ title = "", subtitle = "", children }) => {
       <div className="hero-content">
         <SparklesText
           text={title}
-          className="hero-title"
+          className={`${poppins.className} hero-title`}
           colors={{ first: "#60A5FA", second: "#3B82F6" }}
           sparklesCount={12}
         />
-        <p className="hero-subtitle">{subtitle}</p>
+        <p className={`${poppins.className} hero-subtitle`}>{subtitle}</p>
         {children && <div className="mt-8">{children}</div>}
       </div>
     </section>
