@@ -1,17 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-// <CHANGE> replaced Geist with Montserrat font
 import { Montserrat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-// <CHANGE> importing Montserrat as the main font
 const montserrat = Montserrat({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "FocusFlow",
+  description: "Created by BIT BY BIT",
+  generator: "BIT by BIT",
   icons: {
     icon: [
       {
