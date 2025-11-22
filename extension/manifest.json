@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Focus Monitor Extension",
+  "version": "1.0",
+  "description": "Sends frames to a backend API every 0.5 seconds.",
+
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "http://127.0.0.1:8000/*"
+  ],
+
+  "action": {
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}

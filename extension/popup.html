@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Focus Monitor</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Inter", "Google Sans", Arial, sans-serif;
+    background: #fff;
+    padding: 0;
+    width: 360px;
+  }
+
+  .header {
+    background: linear-gradient(90deg, #037dd6 0%, #1098fc 100%);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .header h2 {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .card {
+    padding: 24px;
+    background: #fff;
+  }
+
+  p {
+    font-size: 14px;
+    color: #24292e;
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #037dd6;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 12px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  #startBtn {
+    background: #037dd6;
+    color: white;
+  }
+
+  #startBtn:hover:not(:disabled) {
+    background: #0260a4;
+  }
+
+  #startBtn:disabled {
+    background: #b0d7f1;
+    border-color: #b0d7f1;
+    cursor: not-allowed;
+  }
+
+  #stopBtn {
+    background: #fff;
+    color: #037dd6;
+  }
+
+  #stopBtn:hover:not(:disabled) {
+    background: #f6f6f6;
+  }
+
+  #stopBtn:disabled {
+    background: #fff;
+    color: #bbc0c5;
+    border-color: #d6d9dc;
+    cursor: not-allowed;
+  }
+</style>
+</head>
+
+<body>
+  <div class="header">
+    <h2>Focus Monitor</h2>
+  </div>
+  
+  <div class="card">
+    <p>Your study session is about to begin.<br>
+    We analyze only your attention signal — nothing is recorded or stored.</p>
+
+    <button id="startBtn" class="btn">Start Monitoring</button>
+    <button id="stopBtn" class="btn" disabled>Stop</button>
+  </div>
+
+<script src="popup.js"></script>
+</body>
+</html>
