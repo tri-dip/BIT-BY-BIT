@@ -5,24 +5,50 @@ import * as PopoverPrimitive from '@radix-ui/react-popover'
 
 import { cn } from '@/lib/utils'
 
-function Popover({
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Root>) {
-  return <PopoverPrimitive.Root data-slot="popover" {...props} />
+type PopoverGroupContextValue = {
+  openId: string | null
+  setOpenId: (id: string | null) => void
 }
 
-function PopoverTrigger({
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
+const PopoverGroupContext = React.createContext<PopoverGroupContextValue | null>(null)
+
+function PopoverGroupProvider({ children }: { children: React.ReactNode }) {
+  const [openId, setOpenId] = React.useState<string | null>(null)
+  return <PopoverGroupContext.Provider value={{ openId, setOpenId }}>{children}</PopoverGroupContext.Provider>
+}
+
+/**
+ * Popover wrapper supports an optional `popoverId` prop. When provided and wrapped
+ * by `PopoverGroupProvider`, opening one popover will close others with different ids.
+ */
+function Popover({ popoverId, ...props }: React.ComponentProps<typeof PopoverPrimitive.Root> & { popoverId?: string }) {
+  const group = React.useContext(PopoverGroupContext)
+
+  // controlled open when part of group
+  const controlledOpen = popoverId && group ? group.openId === popoverId : undefined
+
+  const handleOpenChange = (open: boolean) => {
+    if (group && popoverId) {
+      if (open) {
+        group.setOpenId(popoverId)
+      } else if (group.openId === popoverId) {
+        group.setOpenId(null)
+      }
+    }
+    // forward event if caller provided handler
+    if (props.onOpenChange) props.onOpenChange(open)
+  }
+
+  return (
+    <PopoverPrimitive.Root data-slot="popover" {...props} open={controlledOpen} onOpenChange={handleOpenChange} />
+  )
+}
+
+function PopoverTrigger({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />
 }
 
-function PopoverContent({
-  className,
-  align = 'center',
-  sideOffset = 4,
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Content>) {
+function PopoverContent({ className, align = 'center', sideOffset = 4, ...props }: React.ComponentProps<typeof PopoverPrimitive.Content>) {
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
@@ -39,10 +65,8 @@ function PopoverContent({
   )
 }
 
-function PopoverAnchor({
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {
+function PopoverAnchor({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {
   return <PopoverPrimitive.Anchor data-slot="popover-anchor" {...props} />
 }
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverGroupProvider }

@@ -125,6 +125,8 @@
   }
 }
 
+/* (no override) */
+
 /* Added parallax hero animations and styling */
 @keyframes parallax_fg {
   0% {
@@ -185,28 +187,47 @@
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
+.hero-content {
+  position: relative;
+  z-index: 10;
   text-align: center;
-  line-height: 1.1;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  /* nudge hero further upward */
+  transform: translateY(-10vh);
+}
+
+.hero-title {
+  font-size: 5.5rem;
+  font-weight: 900;
+  margin-bottom: 0.9rem;
+  text-align: center;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   font-weight: 300;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   opacity: 0.95;
   text-align: center;
+  /* Ensure subtitle uses solid text color and no animated gradient */
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: currentColor !important;
+  animation: none !important;
 }
 
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    transform: translateY(-4vh);
   }
 
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }

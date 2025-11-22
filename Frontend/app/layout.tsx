@@ -3,13 +3,14 @@ import type { Metadata } from "next"
 import { Montserrat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+import { PopoverGroupProvider } from "@/components/ui/popover"
 
 const montserrat = Montserrat({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "FocusFlow",
-  description: "Created by BIT BY BIT",
-  generator: "BIT by BIT",
+  title: "v0 App",
+  description: "Created with v0",
+  generator: "v0.app",
   icons: {
     icon: [
       {
@@ -38,8 +39,10 @@ export default function RootLayout({
     <html lang="en">
       {/* <CHANGE> applying Montserrat font to body */}
       <body className={`${montserrat.className} font-sans antialiased`}>
-        {children}
-        <Analytics />
+        <PopoverGroupProvider>
+          {children}
+          <Analytics />
+        </PopoverGroupProvider>
       </body>
     </html>
   )

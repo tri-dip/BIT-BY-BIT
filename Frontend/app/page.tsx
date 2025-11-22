@@ -16,11 +16,14 @@ export default function Home() {
   return (
     <main>
       <SurveillanceNavbar />
-      <div className="fixed top-4 right-4 z-40">
+      <div className="fixed top-4 right-4 z-60">
         <Notifications />
       </div>
       <LiquidGlassNavbar />
-      <MountainVistaParallax title="Focus Flow" subtitle="Master your productivity with smart focus sessions">
+      <MountainVistaParallax
+        title="Focus Flow"
+        subtitle="Discipline beats motivation - show up even when you don't want to."
+      >
         {isTimerRunning && (
           <div className="text-center">
             <div
